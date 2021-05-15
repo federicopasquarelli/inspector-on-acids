@@ -45,10 +45,8 @@ function init_options() {
 $(document).ready(function () {
   init_options().then((items) => {
     $("#options-page-form").on("submit", function (e) {
-      console.log($(this));
       e.preventDefault();
       const formdata = $(this).serializeArray();
-      console.log(formdata);
       chrome.storage.sync.set(
         {
           properties: formdata.map((el) => el.value),
