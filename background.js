@@ -86,7 +86,9 @@ const setInterface = () => {
     wrapper.id = "text-detector";
     wrapper.style.backgroundColor = "black";
     document.body.appendChild(wrapper);
-    selector = wrapper;
+    if (!selector) {
+      selector = wrapper;
+    }
     window.addEventListener("mousemove", window.fontInspectorActive);
     window.addEventListener("keydown", function handler(e) {
       if (e.key === "Escape") {
