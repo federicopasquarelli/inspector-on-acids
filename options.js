@@ -58,7 +58,9 @@ function init_options() {
 
             // Callbacks
             onLoad: function (element) {}, // fires at end of list initialization
-            onOptionClick: function (element, option) {}, // fires when an option is clicked
+            onOptionClick: function (element, option) {
+             $("#options-page-form").submit();
+            }, // fires when an option is clicked
             onControlClose: function (element) {}, // fires when the options list is closed
             onSelectAll: function (element, selected) {}, // fires when (un)select all is clicked
             onPlaceholder: function (element, placeholder, selectedOpts) {}, // fires when the placeholder txt is up<a href="https://www.jqueryscript.net/time-clock/">date</a>d
