@@ -20,7 +20,7 @@ function init_options() {
         properties: [],
       },
       (items) => {
-        $.getJSON("css-properties.json", function (data) {
+        $.getJSON("/plugins/css-properties.json", function (data) {
           let selectOptions = "";
           Object.entries(data).forEach((el) => {
             selectOptions += `<option name="${el[0]}" ${

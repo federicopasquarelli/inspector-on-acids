@@ -59,7 +59,7 @@ const setInterface = () => {
   let wrapper;
   if (!window.fontInspectorActive) {
     window.fontInspectorActive = (e) => {
-      if (initialTarget !== e.target) {
+      if (e.target !== initialTarget) {
         if (initialTarget) {
           initialTarget.style.outline = "";
         }
