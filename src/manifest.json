@@ -4,7 +4,7 @@
   "manifest_version": 3,
   "version": "0.0.0.1",
   "description": "Inspect the page, choose what you need to inspect",
-  "permissions": ["activeTab", "scripting", "storage", "<all_urls>"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "background": {
     "service_worker": "background.js"
   },
