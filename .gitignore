@@ -5,6 +5,7 @@ logs
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/
 # file generated to upload into the google store
+build.zip
 # Dependency directory
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
