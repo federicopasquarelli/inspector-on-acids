@@ -22,7 +22,13 @@ if (!window.inspectorOnAcidsInit) {
     );
     // let selectorStyle = false;
     const css = (element, property) => {
-      return window.getComputedStyle(element, null).getPropertyValue(property);
+      const value = window
+        .getComputedStyle(element, null)
+        .getPropertyValue(property);
+      if (value.startsWith("rgb")) {
+        return `${value} <span class="inspector-color-pick" style="background-color: ${value}"></span>`;
+      }
+      return value;
     };
     const removeAll = () => {
       document.querySelector(".text-detector-wrapper").remove();
@@ -67,12 +73,20 @@ if (!window.inspectorOnAcidsInit) {
         if (selector) {
           let output = "";
           selector.innerHTML = "";
-          output += `<p class="inspector-mark-tag">${e.target.tagName}</p>`;
-          output += `<p class="inspector-mark-classes">${
-            e.target.getAttribute("class") || ""
-          }</p>`;
+          output += `<p class="inspector-mark-tag">&lt;${e.target.tagName}&gt;`;
+          if (e.target.id) {
+            output += `<span class="inspector-mark-ids">#${e.target.id}</span>`;
+          }
+          if (e.target.classList.length) {
+            e.target.classList.forEach((el) => {
+              output += `<span class="inspector-mark-classes">.${el}</span>`;
+            });
+            output += "</p>";
+          } else {
+            output += "</p>";
+          }
           props.forEach((item) => {
-            output += `<p><small>${item}</small> ${css(e.target, item)}</p>`;
+            output += `<p class="inspector-mark-line"><small>${item}</small> <span>${css(e.target, item)}</span></p>`;
           });
           selector.innerHTML = output;
           setPopupPosition(selector, e);
