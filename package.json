@@ -21,6 +21,7 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-minify-html": "^1.0.6",
     "gulp-strip-debug": "^4.0.0",
-    "gulp-uglify": "^3.0.2"
+    "gulp-uglify": "^3.0.2",
+    "gulp-zip": "^5.1.0"
   }
 }

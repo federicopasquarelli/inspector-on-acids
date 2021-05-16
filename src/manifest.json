@@ -4,14 +4,14 @@
   "manifest_version": 3,
   "version": "0.0.0.1",
   "description": "Inspect the page, choose what you need to inspect",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting", "storage", "<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
+  "web_accessible_resources": [
     {
-      "matches": ["http://*/*", "https://*/*"],
-      "css": ["style.css"]
+      "resources": ["style.css"],
+      "matches": ["<all_urls>"]
     }
   ],
   "options_page": "options.html",

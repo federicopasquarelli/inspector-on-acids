@@ -4,10 +4,8 @@ chrome.action.onClicked.addListener((tab) => {
     function: setInterface,
   });
 });
-
-// The body of this function will be executed as a content script inside the
-// current page
 const setInterface = () => {
+  let styleselector = false;
   let selector = false;
   let initialTarget = false;
   let props = [];
@@ -33,9 +31,13 @@ const setInterface = () => {
   };
   const removeAll = () => {
     document.querySelector(".text-detector-wrapper").remove();
+    document.getElementById("style-selector").remove();
     window.removeEventListener("mousemove", window.fontInspectorActive);
     delete window.fontInspectorActive;
     initialTarget.style.outline = "";
+    styleselector = false;
+    selector = false;
+    initialTarget = false;
   };
   const setPopupPosition = (selector, event) => {
     if (event.clientY + selector.clientHeight < vh) {
@@ -82,9 +84,13 @@ const setInterface = () => {
       }
     };
     wrapper = document.createElement("div");
-    wrapper.classList.add("text-detector-wrapper");
+    styleselector = document.createElement("link");
+    styleselector.id = "style-selector";
+    styleselector.href = chrome.runtime.getURL("style.css");
+    styleselector.rel = "stylesheet";
     wrapper.id = "text-detector";
-    wrapper.style.backgroundColor = "black";
+    wrapper.classList.add("text-detector-wrapper");
+    document.head.appendChild(styleselector);
     document.body.appendChild(wrapper);
     if (!selector) {
       selector = wrapper;
