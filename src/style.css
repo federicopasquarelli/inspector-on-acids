@@ -23,8 +23,9 @@
   font-family: inherit;
   opacity: 0.7;
 }
-.text-detector-wrapper .inspect-disabled-item {
-  opacity: 0.3;
-  user-select: none;
-  font-size: 10px;
+.text-detector-wrapper .inspector-mark-tag {
+  color: greenyellow;
+}
+.text-detector-wrapper .inspector-mark-classes {
+  color: aqua;
 }

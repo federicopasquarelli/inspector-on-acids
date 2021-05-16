@@ -67,10 +67,9 @@ if (!window.inspectorOnAcidsInit) {
         if (selector) {
           let output = "";
           selector.innerHTML = "";
-          output += `<p><small>tag-name</small> ${e.target.tagName}</p>`;
-          output += `<p><small>classes</small> ${
-            e.target.getAttribute("class") ||
-            '<span class="inspect-disabled-item">-- undefined --</span>'
+          output += `<p class="inspector-mark-tag">${e.target.tagName}</p>`;
+          output += `<p class="inspector-mark-classes">${
+            e.target.getAttribute("class") || ""
           }</p>`;
           props.forEach((item) => {
             output += `<p><small>${item}</small> ${css(e.target, item)}</p>`;
