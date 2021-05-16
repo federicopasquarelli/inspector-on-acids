@@ -1,0 +1,26 @@
+{
+  "name": "plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/federicopasquarelli/whatfont-but-better.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/federicopasquarelli/whatfont-but-better/issues"
+  },
+  "homepage": "https://github.com/federicopasquarelli/whatfont-but-better#readme",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-strip-debug": "^4.0.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}
