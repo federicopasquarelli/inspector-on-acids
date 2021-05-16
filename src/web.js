@@ -94,8 +94,8 @@ if (!window.inspectorOnAcidsInit) {
       window.addEventListener("mousemove", window.fontInspectorActive);
       window.addEventListener("keydown", function handler(e) {
         if (e.key === "Escape") {
-          removeAll();
           e.currentTarget.removeEventListener(e.type, handler);
+          removeAll();
         }
       });
     } else {
