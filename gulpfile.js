@@ -5,6 +5,30 @@ var uglify = require("gulp-uglify");
 var minify = require("gulp-minify-css");
 var minifyHTML = require("gulp-minify-html");
 var zip = require("gulp-zip");
+var del = require("del");
+
+var sass = require("gulp-sass");
+var postcss = require("gulp-postcss");
+var tailwindcss = require("tailwindcss");
+var autoprefixer = require("autoprefixer");
+var purgecss = require("@fullhuman/postcss-purgecss");
+
+const style = () => {
+  return gulp
+    .src("src/**/*.scss")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(
+      postcss([
+        tailwindcss("./tailwind.config.js"),
+        autoprefixer,
+        purgecss({
+          content: ["src/**/*.html", "src/**/.js"],
+          defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+        }),
+      ])
+    )
+    .pipe(gulp.dest("src/"));
+};
 
 const js = () =>
   gulp
@@ -30,3 +54,4 @@ gulp.task(
   "default",
   gulp.series(js, html, jsons, images, css, copycss, createzip)
 );
+gulp.task("style", style);

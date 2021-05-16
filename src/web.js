@@ -4,12 +4,15 @@ if (!window.inspectorOnAcidsInit) {
     let selector = false;
     let initialTarget = false;
     let props = [];
+    let highlight = false;
     chrome.storage.sync.get(
       {
         properties: [],
+        showHighlight: true,
       },
       (items) => {
         props = items.properties;
+        highlight = items.showHighlight;
       }
     );
     const vw = Math.max(
@@ -35,7 +38,10 @@ if (!window.inspectorOnAcidsInit) {
       document.getElementById("style-selector").remove();
       window.removeEventListener("mousemove", window.fontInspectorActive);
       delete window.fontInspectorActive;
-      initialTarget.style.outline = "";
+      if (highlight) {
+        initialTarget.style.outline = "";
+        highlight = false;
+      }
       styleselector = false;
       selector = false;
       initialTarget = false;
@@ -63,7 +69,7 @@ if (!window.inspectorOnAcidsInit) {
     let wrapper;
     if (!window.fontInspectorActive) {
       window.fontInspectorActive = (e) => {
-        if (e.target !== initialTarget) {
+        if (e.target !== initialTarget && highlight) {
           if (initialTarget) {
             initialTarget.style.outline = "";
           }
@@ -86,7 +92,10 @@ if (!window.inspectorOnAcidsInit) {
             output += "</p>";
           }
           props.forEach((item) => {
-            output += `<p class="inspector-mark-line"><small>${item}</small> <span>${css(e.target, item)}</span></p>`;
+            output += `<p class="inspector-mark-line"><small>${item}</small> <span>${css(
+              e.target,
+              item
+            )}</span></p>`;
           });
           selector.innerHTML = output;
           setPopupPosition(selector, e);

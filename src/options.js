@@ -1,11 +1,9 @@
 function createInputField(name, value) {
-  return `<div class="flex mt-6">
-      <label class="flex items-center" for="form-input-${name}">
+  return `<div class="flex mt-6"><label class="flex items-center" for="form-input-${name}">
         <input type="checkbox" class="form-checkbox" id="form-input-${name}" ${
     value ? "checked" : ""
-  } name="${name}" />
-        <span class="ml-2">${name}</span>
-      </label>
+  } name="${name}" /><span class="ml-2">${name}</span>
+       </label>
     </div>`;
 }
 function createSubmitButton() {
@@ -42,8 +40,43 @@ function init_options() {
     );
   });
 }
+function init_settings() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get(
+      {
+        showHighlight: true,
+      },
+      function (items) {
+        if (items.showHighlight) {
+          $("#showHightlight").attr("checked", true);
+        }
+        $("#showHightlight").on("change", function () {
+          $("#options-page-settings").submit();
+        });
+        resolve();
+      }
+    );
+  });
+}
 $(document).ready(function () {
   init_options().then((items) => {
+    init_settings();
+    $("#options-page-settings").on("submit", function (e) {
+      e.preventDefault();
+      const formdata = $(this).serializeArray().length !== 0;
+      chrome.storage.sync.set(
+        {
+          showHighlight: formdata,
+        },
+        function () {
+          iziToast.show({
+            title: "Saved!",
+            message: "Your preferences have been updated",
+            color: "green",
+          });
+        }
+      );
+    });
     $("#options-page-form").on("submit", function (e) {
       e.preventDefault();
       const formdata = $(this).serializeArray();

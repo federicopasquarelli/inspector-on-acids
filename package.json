@@ -17,11 +17,19 @@
   },
   "homepage": "https://github.com/federicopasquarelli/whatfont-but-better#readme",
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "autoprefixer": "^10.2.5",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-minify-css": "^1.2.4",
     "gulp-minify-html": "^1.0.6",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
     "gulp-strip-debug": "^4.0.0",
     "gulp-uglify": "^3.0.2",
-    "gulp-zip": "^5.1.0"
+    "gulp-zip": "^5.1.0",
+    "postcss-clean": "^1.2.2",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^2.1.2"
   }
 }

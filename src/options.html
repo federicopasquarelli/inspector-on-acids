@@ -1,22 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="min-h-screen">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inspector on acids options</title>
-    <link href="/plugins/tailwind.min.css" rel="stylesheet" />
+    <link href="/options.css" rel="stylesheet" />
     <link rel="stylesheet" href="/plugins/iziToast.min.css" />
     <link rel="stylesheet" href="/plugins/select2.min.css" />
+    <style>
+      .select2-container .select2-search--inline .select2-search__field {
+        height: 30px;
+      }
+    </style>
   </head>
-  <body>
-    <div class="wrapper bg-red">
-      <div class="container mx-auto text-lg tracking-wide">
-        <h1 class="text-3xl font-bold uppercase my-8">
-          Set the CSS properties you want to inspect
-        </h1>
+  <body class="text-lg tracking-widest min-h-screen">
+    <div class="wrapper min-h-screen bg-indigo-300 pt-44">
+      <div
+        class="
+          bg-white
+          shadow-lg
+          rounded
+          px-8
+          pt-6
+          pb-8
+          max-w-5xl
+          w-full
+          mx-auto
+        "
+      >
+        <div class="py-8 mb-8 border-b border-gray-200">
+          <h1 class="text-5xl font-bold flex">
+            <img
+              src="icons/icon128.png"
+              alt="Inspector on acid"
+              class="w-12 mr-4"
+            />
+            Inspector on acids
+          </h1>
+        </div>
+        <p class="mb-8">List below the css properties you want to inspect</p>
         <form action="" id="options-page-form">
           <select name="select" id="select" multiple class="w-full"></select>
+        </form>
+        <form id="options-page-settings" class="mt-8">
+          <div class="flex mb-4">
+            <label class="flex items-center space-x-3">
+              <input
+                class="
+                  form-tick
+                  appearance-none
+                  h-6
+                  w-6
+                  border border-gray-300
+                  rounded-md
+                  checked:bg-blue-600
+                  checked:border-transparent
+                  focus:outline-none
+                "
+                type="checkbox"
+                id="showHightlight"
+                name="show-highlight"
+              />
+              <span> show highlight on the select item </span>
+            </label>
+          </div>
         </form>
       </div>
     </div>
