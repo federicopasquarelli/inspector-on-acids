@@ -13,6 +13,7 @@ function createSubmitButton() {
     <input type="submit" class="btn-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-purple-700 hover:bg-purple-900 text-white font-normal py-2 px-4 mr-1 rounded block" value="Save" />
     </div>`;
 }
+
 function init_options() {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(
@@ -28,16 +29,15 @@ function init_options() {
             }>${el[0]}</option>`;
           });
           $("#select").html(selectOptions);
-          $("#select").select2({
-            tags: true,
-          });
+          $("#select").select2();
           $("#select").on("select2:select select2:unselect", function (e) {
             $("#options-page-form").submit();
           });
+          resolve(items.properties);
         }).fail(function () {
           console.log("An error has occurred.");
+          reject();
         });
-        resolve(items.properties);
       }
     );
   });
