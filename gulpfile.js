@@ -15,7 +15,7 @@ var purgecss = require("@fullhuman/postcss-purgecss");
 
 const style = () => {
   return gulp
-    .src("src/**/*.scss")
+    .src("src/options.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(
       postcss([
@@ -27,6 +27,12 @@ const style = () => {
         }),
       ])
     )
+    .pipe(gulp.dest("src/"));
+};
+const main = () => {
+  return gulp
+    .src("src/style.scss")
+    .pipe(sass().on("error", sass.logError))
     .pipe(gulp.dest("src/"));
 };
 
@@ -52,6 +58,6 @@ const createzip = () =>
 
 gulp.task(
   "default",
-  gulp.series(js, html, jsons, images, css, copycss, createzip)
+  gulp.series(style, main, js, html, jsons, images, css, copycss, createzip)
 );
 gulp.task("style", style);

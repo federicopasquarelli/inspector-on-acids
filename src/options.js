@@ -17,6 +17,7 @@ function init_options() {
     chrome.storage.sync.get(
       {
         properties: [],
+        showHighlight: true,
       },
       (items) => {
         $.getJSON("/plugins/css-properties.json", function (data) {
@@ -31,6 +32,14 @@ function init_options() {
           $("#select").on("select2:select select2:unselect", function (e) {
             $("#options-page-form").submit();
           });
+          if (items.showHighlight) {
+            $("#show-hightlight").attr("checked", true);
+          }
+          $("#options-page-settings")
+            .find("input[type='checkbox']")
+            .on("change", function () {
+              $(this).submit();
+            });
           resolve(items.properties);
         }).fail(function () {
           console.log("An error has occurred.");
@@ -40,30 +49,14 @@ function init_options() {
     );
   });
 }
-function init_settings() {
-  return new Promise((resolve, reject) => {
-    chrome.storage.sync.get(
-      {
-        showHighlight: true,
-      },
-      function (items) {
-        if (items.showHighlight) {
-          $("#showHightlight").attr("checked", true);
-        }
-        $("#showHightlight").on("change", function () {
-          $("#options-page-settings").submit();
-        });
-        resolve();
-      }
-    );
-  });
-}
 $(document).ready(function () {
   init_options().then((items) => {
-    init_settings();
     $("#options-page-settings").on("submit", function (e) {
       e.preventDefault();
-      const formdata = $(this).serializeArray().length !== 0;
+      const formdata =
+        $(this)
+          .serializeArray()
+          .findIndex((el) => el.name === "show-highlight") > -1;
       chrome.storage.sync.set(
         {
           showHighlight: formdata,
