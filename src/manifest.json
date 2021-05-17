@@ -2,7 +2,7 @@
   "name": "Inspector on acids",
   "action": {},
   "manifest_version": 3,
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "description": "Inspect the page, choose what you need to inspect",
   "permissions": ["activeTab", "scripting", "storage"],
   "background": {

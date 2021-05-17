@@ -389,11 +389,6 @@ img {
   background-color: rgba(165, 180, 252, var(--tw-bg-opacity));
 }
 
-.border-gray-200 {
-  --tw-border-opacity: 1;
-  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
-}
-
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgba(209, 213, 219, var(--tw-border-opacity));
@@ -409,10 +404,6 @@ img {
 
 .border {
   border-width: 1px;
-}
-
-.border-b {
-  border-bottom-width: 1px;
 }
 
 .flex {
@@ -515,6 +506,11 @@ img {
   --tw-ring-shadow: 0 0 #0000;
 }
 
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
 .tracking-widest {
   letter-spacing: 0.1em;
 }
@@ -611,5 +607,5 @@ img {
 }
 
 .checked\:bg-blue-600:checked {
-  background-color: #db527d !important;
+  background-color: #ec4899 !important;
 }
