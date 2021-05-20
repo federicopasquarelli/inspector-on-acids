@@ -1,14 +1,15 @@
 .text-detector-wrapper {
-  color: white;
+  color: black;
   position: fixed;
   z-index: 1000000000000000000000;
-  background-color: black;
+  background-color: white;
   width: 300px;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 1px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 10px;
+  overflow: hidden;
   box-shadow: 0px 0px 5px 0px #000000;
   padding-bottom: 5px;
   word-break: break-word;
@@ -29,7 +30,7 @@
   }
   .inspector-mark-tag {
     padding: 10px 16px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
   }
   .inspector-mark-classes {
     color: #ff6b9b;
@@ -40,7 +41,7 @@
   .inspector-mark-line {
     display: flex;
     padding: 5px 16px;
-    border-top: 1px solid rgba(255,255,255,0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
   }
   .inspector-mark-ids {
     color: violet;

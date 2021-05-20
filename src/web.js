@@ -1,18 +1,24 @@
 if (!window.inspectorOnAcidsInit) {
   window.inspectorOnAcidsInit = () => {
+    "use strict";
     let styleselector = false;
     let selector = false;
     let initialTarget = false;
     let props = [];
     let highlight = false;
+    let showDarkTheme = false;
+
     chrome.storage.sync.get(
       {
         properties: [],
         showHighlight: true,
+        showDarkTheme: false,
       },
       (items) => {
         props = items.properties;
         highlight = items.showHighlight;
+        showDarkTheme = items.showDarkTheme;
+        init();
       }
     );
     const vw = Math.max(
@@ -48,11 +54,9 @@ if (!window.inspectorOnAcidsInit) {
       delete window.inspectorOnAcidsInit;
     };
     const setPopupPosition = (selector, event) => {
-      if (event.clientY + selector.clientHeight < vh) {
-        selector.style.top = `${event.clientY + 10}px`;
-      } else {
-        selector.style.top = `${vh - selector.clientHeight + 10}px`;
-      }
+      event.clientY + selector.clientHeight < vh
+        ? (selector.style.top = `${event.clientY + 10}px`)
+        : (selector.style.top = `${vh - selector.clientHeight + 10}px`);
       if (event.clientX + selector.clientWidth < vw) {
         if (selector.style.right) {
           selector.style.right = "";
@@ -65,9 +69,10 @@ if (!window.inspectorOnAcidsInit) {
         selector.style.right = `${-(event.clientX - vw) + 10}px`;
       }
     };
-    // let link;
-    let wrapper;
-    if (!window.fontInspectorActive) {
+    const init = () => {
+      // let link;
+      if (window.fontInspectorActive) return removeAll();
+      let wrapper;
       window.fontInspectorActive = (e) => {
         if (e.target !== initialTarget && highlight) {
           if (initialTarget) {
@@ -104,7 +109,9 @@ if (!window.inspectorOnAcidsInit) {
       wrapper = document.createElement("div");
       styleselector = document.createElement("link");
       styleselector.id = "style-selector";
-      styleselector.href = chrome.runtime.getURL("style.css");
+      styleselector.href = chrome.runtime.getURL(
+        showDarkTheme ? "css/dark.css" : "css/light.css"
+      );
       styleselector.rel = "stylesheet";
       wrapper.id = "text-detector";
       wrapper.classList.add("text-detector-wrapper");
@@ -120,9 +127,7 @@ if (!window.inspectorOnAcidsInit) {
           removeAll();
         }
       });
-    } else {
-      removeAll();
-    }
+    };
   };
 }
 window.inspectorOnAcidsInit();

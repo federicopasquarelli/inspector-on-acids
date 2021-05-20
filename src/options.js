@@ -18,6 +18,7 @@ function init_options() {
       {
         properties: [],
         showHighlight: true,
+        showDarkTheme: false,
       },
       (items) => {
         $.getJSON("/plugins/css-properties.json", function (data) {
@@ -32,9 +33,8 @@ function init_options() {
           $("#select").on("select2:select select2:unselect", function (e) {
             $("#options-page-form").submit();
           });
-          if (items.showHighlight) {
-            $("#show-hightlight").attr("checked", true);
-          }
+          items.showHighlight && $("#show-hightlight").attr("checked", true);
+          items.showDarkTheme && $("#show-dark-theme").attr("checked", true);
           $("#options-page-settings")
             .find("input[type='checkbox']")
             .on("change", function () {
@@ -53,13 +53,15 @@ $(document).ready(function () {
   init_options().then((items) => {
     $("#options-page-settings").on("submit", function (e) {
       e.preventDefault();
-      const formdata =
+      const findOption = (key) =>
         $(this)
           .serializeArray()
-          .findIndex((el) => el.name === "show-highlight") > -1;
+          .findIndex((el) => el.name === key) > -1;
+
       chrome.storage.sync.set(
         {
-          showHighlight: formdata,
+          showHighlight: findOption("show-highlight"),
+          showDarkTheme: findOption("show-dark-theme"),
         },
         function () {
           iziToast.show({

@@ -10,7 +10,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["style.css"],
+      "resources": ["css/light.css", "css/dark.css"],
       "matches": ["<all_urls>"]
     }
   ],

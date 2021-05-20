@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inspector on acids options</title>
-    <link href="/options.css" rel="stylesheet" />
+    <link href="css/options.css" rel="stylesheet" />
     <link rel="stylesheet" href="/plugins/iziToast.min.css" />
     <link rel="stylesheet" href="/plugins/select2.min.css" />
     <style>
@@ -63,6 +63,27 @@
                 name="show-highlight"
               />
               <span> show highlight on the selected item </span>
+            </label>
+          </div>
+          <div class="flex mb-4">
+            <label class="flex items-center space-x-3">
+              <input
+                class="
+                  form-tick
+                  appearance-none
+                  h-6
+                  w-6
+                  border border-gray-300
+                  rounded-md
+                  checked:bg-blue-600
+                  checked:border-transparent
+                  focus:outline-none
+                "
+                type="checkbox"
+                id="show-dark-theme"
+                name="show-dark-theme"
+              />
+              <span> use dark theme</span>
             </label>
           </div>
         </form>

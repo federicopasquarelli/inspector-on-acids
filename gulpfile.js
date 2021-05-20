@@ -15,7 +15,7 @@ var purgecss = require("@fullhuman/postcss-purgecss");
 
 const style = () => {
   return gulp
-    .src("src/options.scss")
+    .src("src/themes/options.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(
       postcss([
@@ -27,13 +27,14 @@ const style = () => {
         }),
       ])
     )
-    .pipe(gulp.dest("src/"));
+    .pipe(gulp.dest("src/css/"));
 };
+
 const main = () => {
   return gulp
-    .src("src/style.scss")
+    .src(["src/themes/dark.scss", "src/themes/light.scss"])
     .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("src/"));
+    .pipe(gulp.dest("src/css/"));
 };
 
 const js = () =>
@@ -48,11 +49,16 @@ const css = () =>
     .src(["src/**/*.css", "!src/**/*.min.css"])
     .pipe(minify())
     .pipe(gulp.dest("build/"));
+
 const copycss = () => gulp.src(["src/**/*.min.css"]).pipe(gulp.dest("build/"));
+
 const html = () =>
   gulp.src("src/**/*.html").pipe(minifyHTML()).pipe(gulp.dest("build/"));
+
 const jsons = () => gulp.src("src/**/*.json").pipe(gulp.dest("build/"));
+
 const images = () => gulp.src("src/**/*.png").pipe(gulp.dest("build/"));
+
 const createzip = () =>
   gulp.src("build/**/*").pipe(zip("build.zip")).pipe(gulp.dest("./"));
 
@@ -60,4 +66,6 @@ gulp.task(
   "default",
   gulp.series(style, main, js, html, jsons, images, css, copycss, createzip)
 );
-gulp.task("style", style);
+gulp.task("style", () =>
+  gulp.watch(["src/themes/light.scss", "src/themes/dark.scss"], gulp.series(main))
+);
