@@ -6,7 +6,8 @@ var minify = require("gulp-minify-css");
 var minifyHTML = require("gulp-minify-html");
 var zip = require("gulp-zip");
 var del = require("del");
-
+var jsonminify = require("gulp-jsonminify");
+var imagemin = require("gulp-imagemin");
 var sass = require("gulp-sass");
 var postcss = require("gulp-postcss");
 var tailwindcss = require("tailwindcss");
@@ -55,9 +56,11 @@ const copycss = () => gulp.src(["src/**/*.min.css"]).pipe(gulp.dest("build/"));
 const html = () =>
   gulp.src("src/**/*.html").pipe(minifyHTML()).pipe(gulp.dest("build/"));
 
-const jsons = () => gulp.src("src/**/*.json").pipe(gulp.dest("build/"));
+const jsons = () =>
+  gulp.src("src/**/*.json").pipe(jsonminify()).pipe(gulp.dest("build/"));
 
-const images = () => gulp.src("src/**/*.png").pipe(gulp.dest("build/"));
+const images = () =>
+  gulp.src("src/**/*.png").pipe(imagemin()).pipe(gulp.dest("build/"));
 
 const createzip = () =>
   gulp.src("build/**/*").pipe(zip("build.zip")).pipe(gulp.dest("./"));
