@@ -10,7 +10,14 @@ if (!window.inspectorOnAcidsInit) {
 
     chrome.storage.sync.get(
       {
-        properties: [],
+        properties: [
+          "font-family",
+          "font-size",
+          "font-weight",
+          "line-height",
+          "letter-spacing",
+          "color",
+        ],
         showHighlight: true,
         showDarkTheme: false,
       },
@@ -29,15 +36,24 @@ if (!window.inspectorOnAcidsInit) {
       document.documentElement.clientHeight || 0,
       window.innerHeight || 0
     );
-    // let selectorStyle = false;
+    const convertRgb = (rgb) => {
+      const output = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)\)$/);
+      const parser = (index) =>
+        ("0" + parseInt(output[index], 10).toString(16)).slice(-2);
+      return (
+        "#" +
+        parser(1) +
+        parser(2) +
+        parser(3) +
+        ` <span class="inspector-color-pick" style="background-color: ${rgb}"></span>`
+      );
+    };
+
     const css = (element, property) => {
       const value = window
         .getComputedStyle(element, null)
         .getPropertyValue(property);
-      if (value.startsWith("rgb")) {
-        return `${value} <span class="inspector-color-pick" style="background-color: ${value}"></span>`;
-      }
-      return value;
+      return value.replace(/rgb\([^\)]+\)/g, convertRgb);
     };
     const removeAll = () => {
       document.querySelector(".text-detector-wrapper").remove();
@@ -70,7 +86,6 @@ if (!window.inspectorOnAcidsInit) {
       }
     };
     const init = () => {
-      // let link;
       if (window.fontInspectorActive) return removeAll();
       let wrapper;
       window.fontInspectorActive = (e) => {

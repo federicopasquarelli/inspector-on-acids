@@ -61,11 +61,25 @@ const images = () => gulp.src("src/**/*.png").pipe(gulp.dest("build/"));
 
 const createzip = () =>
   gulp.src("build/**/*").pipe(zip("build.zip")).pipe(gulp.dest("./"));
-
+const cleanBuild = () => del([__dirname + "/build/"]);
 gulp.task(
   "default",
-  gulp.series(style, main, js, html, jsons, images, css, copycss, createzip)
+  gulp.series(
+    cleanBuild,
+    style,
+    main,
+    js,
+    html,
+    jsons,
+    images,
+    css,
+    copycss,
+    createzip
+  )
 );
 gulp.task("style", () =>
-  gulp.watch(["src/themes/light.scss", "src/themes/dark.scss"], gulp.series(main))
+  gulp.watch(
+    ["src/themes/light.scss", "src/themes/dark.scss"],
+    gulp.series(main)
+  )
 );

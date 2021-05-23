@@ -16,7 +16,14 @@ function init_options() {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(
       {
-        properties: [],
+        properties: [
+          "font-family",
+          "font-size",
+          "font-weight",
+          "line-height",
+          "letter-spacing",
+          "color",
+        ],
         showHighlight: true,
         showDarkTheme: false,
       },

@@ -5,7 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "build": "gulp",
-    "styles": "gulp style",
+    "styles": "gulp style"
   },
   "repository": {
     "type": "git",
