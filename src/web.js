@@ -68,7 +68,6 @@ if (!window.inspectorOnAcidsInit) {
       selector = false;
       initialTarget = false;
       delete window.inspectorOnAcidsInit;
-      chrome.runtime.sendMessage("disable");
     };
     const setPopupPosition = (selector, event) => {
       event.clientY + selector.clientHeight < vh
