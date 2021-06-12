@@ -70,7 +70,7 @@ const images = () =>
 
 const createzip = () =>
   gulp.src("build/**/*").pipe(zip("build.zip")).pipe(gulp.dest("./"));
-const cleanBuild = () => del([__dirname + "/build/"]);
+const cleanBuild = () => del([__dirname + "/build/", __dirname + "/build.zip"]);
 gulp.task(
   "default",
   gulp.series(cleanBuild, style, main, js, html, jsons, images, css, createzip)
