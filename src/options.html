@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inspector on acids options</title>
     <link rel="stylesheet" href="/plugins/iziToast.min.css" />
+    <link rel="stylesheet" href="/plugins/colorPick.css" />
     <link href="css/options.css" rel="stylesheet" />
   </head>
   <body class="text-lg tracking-widest min-h-screen">
@@ -55,10 +56,10 @@
                   focus:outline-none
                 "
                 type="checkbox"
-                id="show-hightlight"
-                name="show-highlight"
+                id="show-dark-theme"
+                name="show-dark-theme"
               />
-              <span> show highlight on the selected item </span>
+              <span> use dark theme</span>
             </label>
           </div>
           <div class="flex mb-4">
@@ -76,10 +77,22 @@
                   focus:outline-none
                 "
                 type="checkbox"
-                id="show-dark-theme"
-                name="show-dark-theme"
+                id="show-hightlight"
+                name="show-highlight"
               />
-              <span> use dark theme</span>
+              <span> show highlight on the selected item </span>
+            </label>
+          </div>
+          <div class="flex mb-4">
+            <label class="flex items-center space-x-3">
+              <div class="colorPickSelector"></div>
+              <span>highlight color</span>
+              <input
+                type="text"
+                class="invisible w-0 h-0"
+                name="outline-color"
+                id="outline-color"
+              />
             </label>
           </div>
         </form>
@@ -98,9 +111,10 @@
         </div>
       </div>
     </div>
-    <script src="/plugins/jquery.js"></script>
-    <script src="/plugins/select2.full.min.js"></script>
+    <script src="/plugins/jquery.js" type="text/javascript"></script>
+    <script src="/plugins/select2.full.min.js" type="text/javascript"></script>
     <script src="/plugins/iziToast.min.js" type="text/javascript"></script>
+    <script src="/plugins/colorPick.js" type="text/javascript"></script>
     <script src="options.js" type="text/javascript"></script>
   </body>
 </html>

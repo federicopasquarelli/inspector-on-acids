@@ -26,6 +26,7 @@ function init_options() {
         ],
         showHighlight: true,
         showDarkTheme: false,
+        outlineColor: "#FF0000",
       },
       (items) => {
         $.getJSON("/plugins/css-properties.json", function (data) {
@@ -36,14 +37,11 @@ function init_options() {
             }>${el[0]}</option>`;
           });
           $("#select").html(selectOptions);
-          $("#select").select2();
-          $("#select").on("select2:select select2:unselect", function (e) {
-            $("#options-page-form").submit();
-          });
+          $("#outline-color").val(items.outlineColor);
           items.showHighlight && $("#show-hightlight").attr("checked", true);
           items.showDarkTheme && $("#show-dark-theme").attr("checked", true);
           $("#options-page-settings")
-            .find("input[type='checkbox']")
+            .find("input")
             .on("change", function () {
               $(this).submit();
             });
@@ -57,7 +55,46 @@ function init_options() {
   });
 }
 $(document).ready(function () {
-  init_options().then((items) => {
+  init_options().then(() => {
+    $("#select").select2();
+    $("#select").on("select2:select select2:unselect", function (e) {
+      $("#options-page-form").submit();
+    });
+    $(".colorPickSelector").colorPick({
+      initialColor: $("#outline-color").val(),
+      allowRecent: true,
+      recentMax: 5,
+      allowCustomColor: false,
+      palette: [
+        "#1abc9c",
+        "#16a085",
+        "#2ecc71",
+        "#27ae60",
+        "#3498db",
+        "#2980b9",
+        "#9b59b6",
+        "#8e44ad",
+        "#34495e",
+        "#2c3e50",
+        "#f1c40f",
+        "#f39c12",
+        "#e67e22",
+        "#d35400",
+        "#e74c3c",
+        "#c0392b",
+        "#ecf0f1",
+        "#bdc3c7",
+        "#95a5a6",
+        "#7f8c8d",
+      ],
+      onColorSelected: function () {
+        this.element.css({ backgroundColor: this.color });
+        if (this.color !== $("#outline-color").val()) {
+          $("#outline-color").val(this.color);
+          $("#outline-color").change();
+        }
+      },
+    });
     $("#options-page-settings").on("submit", function (e) {
       e.preventDefault();
       const findOption = (key) =>
@@ -69,6 +106,7 @@ $(document).ready(function () {
         {
           showHighlight: findOption("show-highlight"),
           showDarkTheme: findOption("show-dark-theme"),
+          outlineColor: $("#outline-color").val(),
         },
         function () {
           iziToast.show({

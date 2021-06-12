@@ -428,6 +428,10 @@ a {
   font-weight: 700;
 }
 
+.h-0 {
+  height: 0px;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -532,6 +536,14 @@ a {
 
 .tracking-widest {
   letter-spacing: 0.1em;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.w-0 {
+  width: 0px;
 }
 
 .w-6 {
@@ -946,4 +958,12 @@ a {
 
 .checked\:bg-blue-600:checked {
   background-color: #ec4899 !important;
+}
+
+.colorPickSelector {
+  border-radius: 5px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: all linear 0.2s;
 }

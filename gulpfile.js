@@ -2,7 +2,7 @@
 var gulp = require("gulp");
 var stripdebug = require("gulp-strip-debug");
 var uglify = require("gulp-uglify");
-var minify = require("gulp-minify-css");
+var cleanCSS = require("gulp-clean-css");
 var minifyHTML = require("gulp-minify-html");
 var zip = require("gulp-zip");
 var del = require("del");
@@ -47,11 +47,17 @@ const js = () =>
 
 const css = () =>
   gulp
-    .src(["src/**/*.css", "!src/**/*.min.css"])
-    .pipe(minify())
+    .src(["src/**/*.css"])
+    .pipe(
+      cleanCSS({
+        level: {
+          1: {
+            specialComments: 0,
+          },
+        },
+      })
+    )
     .pipe(gulp.dest("build/"));
-
-const copycss = () => gulp.src(["src/**/*.min.css"]).pipe(gulp.dest("build/"));
 
 const html = () =>
   gulp.src("src/**/*.html").pipe(minifyHTML()).pipe(gulp.dest("build/"));
@@ -67,18 +73,7 @@ const createzip = () =>
 const cleanBuild = () => del([__dirname + "/build/"]);
 gulp.task(
   "default",
-  gulp.series(
-    cleanBuild,
-    style,
-    main,
-    js,
-    html,
-    jsons,
-    images,
-    css,
-    copycss,
-    createzip
-  )
+  gulp.series(cleanBuild, style, main, js, html, jsons, images, css, createzip)
 );
 gulp.task("style", () =>
   gulp.watch(

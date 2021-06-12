@@ -13,7 +13,10 @@
   .text-detector-wrapper p {
     margin: 0;
     font-weight: 700;
-    font-family: inherit; }
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit; }
   .text-detector-wrapper small {
     font-weight: 600;
     font-size: 8px;
