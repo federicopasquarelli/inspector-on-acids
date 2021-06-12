@@ -19,7 +19,7 @@ if (!window.inspectorOnAcidsInit) {
         ],
         showHighlight: true,
         showDarkTheme: false,
-        outlineColor: "#FF0000",
+        outlineColor: "#E74C3C",
       },
       (items) => {
         props = items.properties;

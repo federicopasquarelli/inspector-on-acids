@@ -1,17 +1,3 @@
-function createInputField(name, value) {
-  return `<div class="flex mt-6"><label class="flex items-center" for="form-input-${name}">
-        <input type="checkbox" class="form-checkbox" id="form-input-${name}" ${
-    value ? "checked" : ""
-  } name="${name}" /><span class="ml-2">${name}</span>
-       </label>
-    </div>`;
-}
-function createSubmitButton() {
-  return `<div class="flex mt-6">
-    <input type="submit" class="btn-primary transition duration-300 ease-in-out focus:outline-none focus:shadow-outline bg-purple-700 hover:bg-purple-900 text-white font-normal py-2 px-4 mr-1 rounded block" value="Save" />
-    </div>`;
-}
-
 function init_options() {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(
@@ -26,7 +12,7 @@ function init_options() {
         ],
         showHighlight: true,
         showDarkTheme: false,
-        outlineColor: "#FF0000",
+        outlineColor: "#E74C3C",
       },
       (items) => {
         $.getJSON("/plugins/css-properties.json", function (data) {
@@ -58,6 +44,7 @@ $(document).ready(function () {
   init_options().then(() => {
     $("#select").select2();
     $("#select").on("select2:select select2:unselect", function (e) {
+      console.log("select");
       $("#options-page-form").submit();
     });
     $(".colorPickSelector").colorPick({
