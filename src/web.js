@@ -81,27 +81,26 @@ if (!window.inspectorOnAcidsInit) {
     const setPopupPosition = (sel, event) => {
       const height = documentSize("height");
       const width = documentSize("width");
-      event.clientY + sel.clientHeight < height
-        ? (sel.style.top = `${event.clientY + 10}px`)
-        : (sel.style.top = `${height - sel.clientHeight + 10}px`);
+      if (event.clientY + sel.clientHeight < height) {
+        if (sel.style.bottom) sel.style.bottom = "";
+        sel.style.top = `${event.clientY + 10}px`;
+      } else {
+        if (sel.style.top) sel.style.top = "";
+        sel.style.bottom = `${-(event.clientY - height) + 10}px`;
+      }
       if (event.clientX + sel.clientWidth < width) {
-        if (sel.style.right) {
-          sel.style.right = "";
-        }
+        if (sel.style.right) sel.style.right = "";
         sel.style.left = `${event.clientX + 10}px`;
       } else {
-        if (sel.style.left) {
-          sel.style.left = "";
-        }
+        if (sel.style.left) sel.style.left = "";
         sel.style.right = `${-(event.clientX - width) + 10}px`;
       }
     };
     const highlightElement = (target) => {
-      if (target !== initialTarget && highlight) {
-        if (initialTarget) initialTarget.style.outline = "";
-        initialTarget = target;
-        initialTarget.style.outline = `1px solid ${outlineColor}`;
-      }
+      if (target === initialTarget || !highlight) return;
+      if (initialTarget) initialTarget.style.outline = "";
+      initialTarget = target;
+      initialTarget.style.outline = `1px solid ${outlineColor}`;
     };
     const init = () => {
       if (window.fontInspectorActive) return removeAll();
