@@ -2,16 +2,25 @@
   "name": "Inspector on acids",
   "action": {},
   "manifest_version": 3,
-  "version": "0.0.0.9",
+  "version": "0.0.1.0",
   "description": "Inspect the page, choose what you need to inspect",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
   "background": {
     "service_worker": "background.js"
   },
   "web_accessible_resources": [
     {
-      "resources": ["css/light.css", "css/dark.css"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "css/light.css",
+        "css/dark.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "options_page": "options.html",

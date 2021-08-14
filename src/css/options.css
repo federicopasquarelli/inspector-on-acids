@@ -507,10 +507,6 @@ a {
   padding-bottom: 2rem;
 }
 
-.pt-44 {
-  padding-top: 11rem;
-}
-
 * {
   --tw-shadow: 0 0 #0000;
 }
@@ -966,4 +962,8 @@ a {
   height: 24px;
   cursor: pointer;
   transition: all linear 0.2s;
+}
+
+.wrapper {
+  padding-top: 8vw;
 }

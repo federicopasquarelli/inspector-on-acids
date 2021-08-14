@@ -18,9 +18,8 @@ function init_options() {
         $.getJSON("/plugins/css-properties.json", function (data) {
           let selectOptions = "";
           Object.entries(data).forEach((el) => {
-            selectOptions += `<option name="${el[0]}" ${
-              items.properties.includes(el[0]) ? "selected" : ""
-            }>${el[0]}</option>`;
+            selectOptions += `<option name="${el[0]}" ${items.properties.includes(el[0]) ? "selected" : ""
+              }>${el[0]}</option>`;
           });
           $("#select").html(selectOptions);
           $("#outline-color").val(items.outlineColor);
@@ -96,11 +95,7 @@ $(document).ready(function () {
           outlineColor: $("#outline-color").val(),
         },
         function () {
-          iziToast.show({
-            title: "Saved!",
-            message: "Your preferences have been updated",
-            color: "green",
-          });
+          console.log("preferences updated");
         }
       );
     });
@@ -112,11 +107,7 @@ $(document).ready(function () {
           properties: formdata.map((el) => el.value),
         },
         function () {
-          iziToast.show({
-            title: "Saved!",
-            message: "Your preferences have been updated",
-            color: "green",
-          });
+          console.log("preferences updated");
         }
       );
     });
