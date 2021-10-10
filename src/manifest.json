@@ -2,7 +2,7 @@
   "name": "Inspector on acids",
   "action": {},
   "manifest_version": 3,
-  "version": "0.0.1.0",
+  "version": "0.0.1.2",
   "description": "Inspect the page, choose what you need to inspect",
   "permissions": [
     "activeTab",
@@ -26,5 +26,12 @@
   "options_page": "options.html",
   "icons": {
     "128": "/icons/icon128.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+U"
+      }
+    }
   }
 }

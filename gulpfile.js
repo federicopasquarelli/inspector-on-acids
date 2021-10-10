@@ -8,10 +8,9 @@ var zip = require("gulp-zip");
 var del = require("del");
 var jsonminify = require("gulp-jsonminify");
 var imagemin = require("gulp-imagemin");
-var sass = require("gulp-sass");
+var sass = require('gulp-dart-sass');
 var postcss = require("gulp-postcss");
 var tailwindcss = require("tailwindcss");
-var autoprefixer = require("autoprefixer");
 var purgecss = require("@fullhuman/postcss-purgecss");
 
 const style = () => {
@@ -21,7 +20,6 @@ const style = () => {
     .pipe(
       postcss([
         tailwindcss("./tailwind.config.js"),
-        autoprefixer,
         purgecss({
           content: ["src/**/*.html", "src/**/.js"],
           defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
