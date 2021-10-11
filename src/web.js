@@ -18,13 +18,13 @@ if (!window.inspectorOnAcidsInit) {
           "color",
         ],
         showHighlight: true,
-        theme: "default",
+        cssTheme: "dark",
         outlineColor: "#E74C3C",
       },
       (items) => {
         props = items.properties;
         highlight = items.showHighlight;
-        theme = items.theme;
+        theme = items.cssTheme;
         outlineColor = items.outlineColor;
         init();
       }
@@ -141,19 +141,7 @@ if (!window.inspectorOnAcidsInit) {
       wrapper = document.createElement("div");
       styletag = document.createElement("link");
       styletag.id = "style-selector";
-      const cssSource = () => {
-        if (
-          (theme === "default" &&
-            window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark").matches) ||
-          theme === "dark"
-        ) {
-          return "css/dark.css";
-        } else {
-          return "css/light.css";
-        }
-      };
-      styletag.href = chrome.runtime.getURL(cssSource());
+      styletag.href = chrome.runtime.getURL(`css/${theme}.css`);
       styletag.rel = "stylesheet";
       wrapper.id = "text-detector";
       wrapper.classList.add("text-detector-wrapper");

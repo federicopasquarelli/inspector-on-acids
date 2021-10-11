@@ -12,6 +12,7 @@ function init_options() {
         ],
         showHighlight: true,
         theme: "default",
+        cssTheme: "dark",
         outlineColor: "#E74C3C",
       },
       (items) => {
@@ -24,7 +25,9 @@ function init_options() {
           });
           $("#select").html(selectOptions);
           $("#outline-color").val(items.outlineColor);
-          $("#select-theme").find(`option[value="${items.theme}"]`).attr("selected", true);
+          $("#select-theme")
+            .find(`option[value="${items.theme}"]`)
+            .attr("selected", true);
           items.showHighlight && $("#show-hightlight").attr("checked", true);
           $("#options-page-settings")
             .find("input")
@@ -92,10 +95,24 @@ $(document).ready(function () {
         $(this)
           .serializeArray()
           .find((el) => el.name === key);
+      const selectedTheme = findOption("select-theme").value;
+      const cssSource = () => {
+        if (
+          (selectedTheme === "default" &&
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark").matches) ||
+            selectedTheme === "dark"
+        ) {
+          return "dark";
+        } else {
+          return "light";
+        }
+      };
       chrome.storage.sync.set(
         {
           showHighlight: findOption("show-highlight").value === "on",
-          theme: findOption("select-theme").value,
+          theme: selectedTheme,
+          cssTheme: cssSource(),
           outlineColor: findOption("outline-color").value,
         },
         function () {
