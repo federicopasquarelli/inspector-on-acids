@@ -41,24 +41,11 @@
         </form>
         <form id="options-page-settings" class="mt-8">
           <div class="flex mb-4">
-            <label class="flex items-center space-x-3">
-              <input
-                class="
-                  form-tick
-                  appearance-none
-                  h-6
-                  w-6
-                  border border-gray-300
-                  rounded-md
-                  checked:bg-blue-600 checked:border-transparent
-                  focus:outline-none
-                "
-                type="checkbox"
-                id="show-dark-theme"
-                name="show-dark-theme"
-              />
-              <span> use dark theme</span>
-            </label>
+            <select name="select-theme" id="select-theme" class="w-full">
+              <option value="default">system default</option>
+              <option value="light">light</option>
+              <option value="dark">dark</option>
+            </select>
           </div>
           <div class="flex mb-4">
             <label class="flex items-center space-x-3">
@@ -94,7 +81,7 @@
           </div>
         </form>
         <div class="text-sm mt-12 ">
-          you can activate the plugin by pressing Alt + U. costumize the keyboard shortcut on <code class="underline">chrome://extensions/shortcuts</code>
+          you can activate the plugin by pressing Alt + U.<br>costumize the keyboard shortcut on <code class="underline">chrome://extensions/shortcuts</code>
         </div>
         <div class="text-sm mt-4">
           This is a plugin by

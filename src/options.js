@@ -11,7 +11,7 @@ function init_options() {
           "color",
         ],
         showHighlight: true,
-        showDarkTheme: false,
+        theme: "default",
         outlineColor: "#E74C3C",
       },
       (items) => {
@@ -24,8 +24,8 @@ function init_options() {
           });
           $("#select").html(selectOptions);
           $("#outline-color").val(items.outlineColor);
+          $("#select-theme").find(`option[value="${items.theme}"]`).attr("selected", true);
           items.showHighlight && $("#show-hightlight").attr("checked", true);
-          items.showDarkTheme && $("#show-dark-theme").attr("checked", true);
           $("#options-page-settings")
             .find("input")
             .on("change", function () {
@@ -43,9 +43,12 @@ function init_options() {
 
 $(document).ready(function () {
   init_options().then(() => {
+    $("#select-theme").select2({ minimumResultsForSearch: -1 });
     $("#select").select2();
-    $("#select").on("select2:select select2:unselect", function (e) {
-      console.log("select");
+    $("#select-theme").on("select2:select", function () {
+      $("#options-page-settings").submit();
+    });
+    $("#select").on("select2:select select2:unselect", function () {
       $("#options-page-form").submit();
     });
     $(".colorPickSelector").colorPick({
@@ -88,13 +91,12 @@ $(document).ready(function () {
       const findOption = (key) =>
         $(this)
           .serializeArray()
-          .findIndex((el) => el.name === key) > -1;
-
+          .find((el) => el.name === key);
       chrome.storage.sync.set(
         {
-          showHighlight: findOption("show-highlight"),
-          showDarkTheme: findOption("show-dark-theme"),
-          outlineColor: $("#outline-color").val(),
+          showHighlight: findOption("show-highlight").value === "on",
+          theme: findOption("select-theme").value,
+          outlineColor: findOption("outline-color").value,
         },
         function () {
           console.log("preferences updated");

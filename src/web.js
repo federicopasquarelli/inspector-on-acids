@@ -3,7 +3,7 @@ if (!window.inspectorOnAcidsInit) {
   let styletag = false;
   let props = [];
   let highlight = false;
-  let showDarkTheme = false;
+  let theme = false;
   let outlineColor = false;
   let wrapper;
   window.inspectorOnAcidsInit = () => {
@@ -18,13 +18,13 @@ if (!window.inspectorOnAcidsInit) {
           "color",
         ],
         showHighlight: true,
-        showDarkTheme: false,
+        theme: "default",
         outlineColor: "#E74C3C",
       },
       (items) => {
         props = items.properties;
         highlight = items.showHighlight;
-        showDarkTheme = items.showDarkTheme;
+        theme = items.theme;
         outlineColor = items.outlineColor;
         init();
       }
@@ -120,6 +120,7 @@ if (!window.inspectorOnAcidsInit) {
           e.target.classList.forEach((el) => {
             output += `<span class="inspector-mark-classes">.${el}</span>`;
           });
+          output += `<span class="inspector-element-size">${e.target.offsetWidth}x${e.target.offsetHeight}</span>`;
           output += "</p>";
           return output;
         };
@@ -140,9 +141,19 @@ if (!window.inspectorOnAcidsInit) {
       wrapper = document.createElement("div");
       styletag = document.createElement("link");
       styletag.id = "style-selector";
-      styletag.href = chrome.runtime.getURL(
-        showDarkTheme ? "css/dark.css" : "css/light.css"
-      );
+      const cssSource = () => {
+        if (
+          (theme === "default" &&
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark").matches) ||
+          theme === "dark"
+        ) {
+          return "css/dark.css";
+        } else {
+          return "css/light.css";
+        }
+      };
+      styletag.href = chrome.runtime.getURL(cssSource());
       styletag.rel = "stylesheet";
       wrapper.id = "text-detector";
       wrapper.classList.add("text-detector-wrapper");
