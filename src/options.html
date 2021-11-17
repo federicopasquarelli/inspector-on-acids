@@ -33,14 +33,15 @@
           mx-auto
         "
       >
-        <p class="mb-8 text-bold">
-          List below the css properties you want to inspect
-        </p>
-        <form action="" id="options-page-form">
+      <form action="" id="options-page-form">
+          <label for="select">
+            List below the css properties you want to inspect
+          </label>
           <select name="select" id="select" multiple class="w-full"></select>
         </form>
         <form id="options-page-settings" class="mt-6">
-          <div class="flex mb-4">
+          <div class="flex mb-4 flex-col">
+            <label for="select-theme">Select theme</label>
             <select name="select-theme" id="select-theme" class="w-full">
               <option value="default">system default</option>
               <option value="light">light</option>
