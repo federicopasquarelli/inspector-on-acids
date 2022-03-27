@@ -28,7 +28,7 @@ function init_options() {
           $("#select-theme")
             .find(`option[value="${items.theme}"]`)
             .attr("selected", true);
-          items.showHighlight && $("#show-hightlight").attr("checked", true);
+          items.showHighlight && $("#show-highlight").attr("checked", true);
           $("#options-page-settings")
             .find("input")
             .on("change", function () {
@@ -91,11 +91,10 @@ $(document).ready(function () {
     });
     $("#options-page-settings").on("submit", function (e) {
       e.preventDefault();
-      const findOption = (key) =>
-        $(this)
-          .serializeArray()
-          .find((el) => el.name === key);
+      const serialized = $(this).serializeArray()
+      const findOption = (key) => serialized.find((el) => el.name === key);
       const selectedTheme = findOption("select-theme").value;
+      const highlight = findOption("show-highlight") && findOption("show-highlight").value === "on" ? true : false;
       const cssSource = () => {
         if (
           (selectedTheme === "default" &&
@@ -110,7 +109,7 @@ $(document).ready(function () {
       };
       chrome.storage.sync.set(
         {
-          showHighlight: findOption("show-highlight").value === "on",
+          showHighlight: highlight,
           theme: selectedTheme,
           cssTheme: cssSource(),
           outlineColor: findOption("outline-color").value,
